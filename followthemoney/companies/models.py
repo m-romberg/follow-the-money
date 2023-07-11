@@ -13,9 +13,15 @@ class Rating(models.Model):
         ]
      )
 
+    def __str__(self):
+        return self.rating
+
 class Classification(models.Model):
     """Classifications for companies"""
     classification = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.classification
 
 class Company(models.Model):
     """Company entry"""
@@ -30,12 +36,18 @@ class Company(models.Model):
     num_employees = models.PositiveIntegerField()
     revenue = models.IntegerField()
 
+    def __str__(self):
+        return self.company
+
 
 class Brand(models.Model):
     """Brand entry"""
     brand = models.CharField(max_length=50)
     parent_company = models.ForeignKey(Company, on_delete=models.CASCADE)
     logo = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.brand
 
 class Shareholder(models.Model):
     """Shareholder data for companies"""
@@ -47,9 +59,15 @@ class Shareholder(models.Model):
                                       related_name="child_company")
     source = models.CharField(max_length=200)
 
+    def __str__(self):
+        return f"{self.shareholder}, {self.child_company}"
+
 class Lawsuit(models.Model):
     """Lawsuits against companies"""
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     date = models.DateField()
     details =  models.CharField(max_length=300)
     source = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f"{self.company}, {self.date}"
