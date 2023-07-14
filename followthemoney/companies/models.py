@@ -12,12 +12,13 @@ class Rating(models.Model):
         validators=[
             MaxValueValidator(10),
             MinValueValidator(1)
-        ]
+        ],
+        unique=True,
      )
     description =  models.TextField(default="")
 
     def __str__(self):
-        return self.rating
+        return str(self.rating)
 
 class Classification(models.Model):
     """Classifications for companies"""
@@ -29,12 +30,18 @@ class Classification(models.Model):
 class Company(models.Model):
     """Company entry"""
     company = models.CharField(max_length=50)
-    ranking = models.ForeignKey(Classification, on_delete=models.CASCADE)
+    classification = models.ForeignKey(Classification, on_delete=models.CASCADE)
     rating = models.ForeignKey(Rating, on_delete=models.CASCADE)
     parent_company = models.ForeignKey("self",
                                        on_delete=models.CASCADE,
-                                       related_name="parent")
-    logo = models.ImageField(max_length = 200)
+                                       related_name="parent",
+                                       default=None,
+                                       blank=True,
+                                       null=True)
+    logo = models.ImageField(max_length = 200,
+                             default=None,
+                             blank=True,
+                             null=True)
     founded = models.DateField()
     num_employees = models.PositiveIntegerField()
     revenue = models.IntegerField()
@@ -49,7 +56,10 @@ class Brand(models.Model):
     """Brand entry"""
     brand = models.CharField(max_length=50)
     parent_company = models.ForeignKey(Company, on_delete=models.CASCADE)
-    logo = models.ImageField(max_length = 200)
+    logo = models.ImageField(max_length = 200,
+                             default=None,
+                             blank=True,
+                             null=True)
     details =  models.TextField(default=DETAILS_DEFAULT)
     source = models.URLField(max_length = 200, blank=False, default=None)
 
