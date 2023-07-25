@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
+
 ### Models for Company app
 
 DETAILS_DEFAULT = "Additional details currently not available."
@@ -74,6 +75,13 @@ class Shareholder(models.Model):
     child_company = models.ForeignKey(Company,
                                       on_delete=models.CASCADE,
                                       related_name="child")
+    share = models.DecimalField(
+        validators=[
+            MaxValueValidator(100),
+            MinValueValidator(0)],
+        max_digits=5,
+        decimal_places=2,
+        default=0)
     details =  models.TextField(default=DETAILS_DEFAULT)
     source = models.URLField(max_length = 200, blank=False, default=None)
 
