@@ -6,5 +6,5 @@ urlpatterns = [
     #ex: /companies/
     path("", views.index, name="index"),
     #ex: /companies/blackrock
-    path("<str:company>/", views.company, name="company"),
+    path("<str:company>/", views.company_detail, name="company"),
 ]
