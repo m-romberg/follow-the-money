@@ -4,5 +4,14 @@
 
 {% block content %}
   <h2>{{ company.company }}</h2>
+  <h3> Classification: {{company.classification}}</h3>
   <p>{{ company.details }}</p>
+  <p>Rating: {{company.rating}}</p>
+  {% if company.parent_company %}
+    <p>Parent Company:
+      <a href=/companies/{{company.parent_company}}>
+        {{company.parent_company}}
+      </a>
+    </p>
+  {% endif %}
 {% endblock %}
