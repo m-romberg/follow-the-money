@@ -1,0 +1,8 @@
+{% extends "companies/base.html" %}
+
+{% block title %}{{company}}{% endblock %}
+
+{% block content %}
+  <h2>{{ company.company }}</h2>
+  <p>{{ company.details }}</p>
+{% endblock %}

@@ -1,11 +1,21 @@
 from django.shortcuts import render
 
-from django.http import HttpResponse
+from django.template import loader
+
+from .models import Company
 
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the companies index.")
+    companies = Company.objects.all()
+    context = {
+        "companies": companies,
+    }
+    return render(request, "companies/index.html", context)
 
 def company(request, company):
-    response = "You are looking at the results for company %s."
-    return HttpResponse(response % company)
+    company = Company.objects.get(company=company)
+    print("🔴🔴🔴 Company:", company)
+    context = {
+        "company": company,
+    }
+    return render(request, "companies/company.html", context)
