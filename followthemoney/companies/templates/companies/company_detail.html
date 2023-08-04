@@ -17,4 +17,18 @@
       </a>
     </p>
   {% endif %}
+  <h2>Shareholders</h2>
+  {% if not shareholders %}
+  <p>No known shareholders.</p>
+  {% endif %}
+  <ol>
+    {% for sh in shareholders %}
+    <li>
+      <a href=/companies/{{sh.shareholder}}>
+        {{sh.shareholder}}
+      </a>:{{sh.share}}
+    </li>
+    {% endfor %}
+  </ol>
+
 {% endblock %}

@@ -22,4 +22,4 @@ def company_detail(request, company):
         "company":company,
         "shareholders": shareholders,
     }
-    return render(request, "companies/company.html", context)
+    return render(request, "companies/company_detail.html", context)
