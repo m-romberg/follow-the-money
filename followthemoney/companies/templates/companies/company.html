@@ -7,6 +7,9 @@
   <h3> Classification: {{company.classification}}</h3>
   <p>{{ company.details }}</p>
   <p>Rating: {{company.rating}}</p>
+  <p>Founded: {{company.founded}}</p>
+  <p>Number of Employees: {{company.num_employees}}</p>
+  <p>Revenue: {{company.revenue}}</p>
   {% if company.parent_company %}
     <p>Parent Company:
       <a href=/companies/{{company.parent_company}}>
